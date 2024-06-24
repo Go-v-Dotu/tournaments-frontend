@@ -10,7 +10,7 @@
 <ModeWatcher />
 
 <div class="h-full">
-	<!-- <Navbar /> -->
+	<Navbar />
 
 	<slot />
 </div>
