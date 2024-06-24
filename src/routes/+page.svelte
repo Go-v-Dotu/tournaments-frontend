@@ -1,4 +1,3 @@
-<script lang='ts'>
-    export let data;
+<script lang="ts">
+	import type { PageData } from './$types';
 </script>
-

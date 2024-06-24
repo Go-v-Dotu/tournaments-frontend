@@ -7,6 +7,8 @@
 	import { mode, toggleMode } from 'mode-watcher';
 
 	import { Button } from '$lib/components/ui/button';
+
+	import Commander from '$lib/icons/commander.svelte';
 </script>
 
 <Button
@@ -33,3 +35,5 @@
 		</div>
 	{/if}
 </Button>
+
+<Commander />

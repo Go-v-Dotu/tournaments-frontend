@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import '../global.css';
 	import '../app.css';
 
@@ -10,7 +10,7 @@
 <ModeWatcher />
 
 <div class="h-full">
-	<Navbar />
+	<!-- <Navbar /> -->
 
 	<slot />
 </div>
