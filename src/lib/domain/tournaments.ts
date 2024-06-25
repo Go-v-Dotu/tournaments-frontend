@@ -5,7 +5,11 @@ interface TournamentIdEmbed {
 }
 
 interface Tournament extends TournamentIdEmbed {
-	name: string;
+	title: string;
+	host: string;
+	createdAt: Date;
+	previewUrl: string;
+	status: string;
 }
 
 export type { TournamentId, Tournament };

@@ -9,8 +9,9 @@
 
 <ModeWatcher />
 
-<div class="h-full">
+<div class="flex h-full flex-col">
 	<Navbar />
-
-	<slot />
+	<div class="flex-1 overflow-auto bg-muted/80">
+		<slot />
+	</div>
 </div>
