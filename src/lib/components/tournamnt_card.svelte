@@ -18,7 +18,7 @@
 			<div class="overflow-hidden">
 				<img
 					class={cn(
-						'h-auto w-auto object-cover  ',
+						'h-auto w-auto object-cover',
 						aspectRatio === 'portrait' ? 'aspect-[3/4]' : 'aspect-square'
 					)}
 					src={tournament.previewUrl}
