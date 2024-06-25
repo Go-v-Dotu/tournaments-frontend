@@ -12,7 +12,7 @@
 
 <div class="flex h-full flex-col">
 	<Header />
-	<div class="container flex flex-1 flex-col overflow-y-auto bg-muted/80">
+	<div class="flex flex-1 flex-col overflow-y-auto bg-muted/80">
 		<slot />
 		<div class="mt-auto">
 			<Footer />
