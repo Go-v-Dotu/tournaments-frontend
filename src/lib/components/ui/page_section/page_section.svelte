@@ -5,12 +5,6 @@
 	export { className as class };
 </script>
 
-<h1
-	class={cn(
-		'text-center text-3xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]',
-		className
-	)}
-	{...$$restProps}
->
+<section class={cn('flex flex-col gap-2 py-2', className)} {...$$restProps}>
 	<slot />
-</h1>
+</section>

@@ -10,9 +10,9 @@
 
 <ModeWatcher />
 
-<div class="flex h-full flex-col bg-muted/80">
+<div class="flex h-full flex-col">
 	<Header />
-	<div class="flex-1 overflow-auto">
+	<div class="flex-1 overflow-y-auto bg-muted/80">
 		<slot />
 		<Footer />
 	</div>

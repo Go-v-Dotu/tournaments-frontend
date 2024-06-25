@@ -1,9 +1,16 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
+
 	let className: string | undefined | null = undefined;
 	export { className as class };
 </script>
 
-<div class={cn('flex w-full items-center justify-center space-x-4 py-4 md:pb-10', className)}>
+<h1
+	class={cn(
+		'text-1xl font-bold leading-tight tracking-tighter md:text-2xl lg:leading-none',
+		className
+	)}
+	{...$$restProps}
+>
 	<slot />
-</div>
+</h1>

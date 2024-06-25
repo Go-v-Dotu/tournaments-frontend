@@ -2,7 +2,6 @@
 	"name": "tournaments-ui",
 	"version": "0.0.1",
 	"private": true,
-	"type": "module",
 	"scripts": {
 		"dev": "vite dev ",
 		"build": "vite build",
@@ -35,6 +34,7 @@
 		"typescript-eslint": "8.0.0-alpha.30",
 		"vite": "^5.3.1"
 	},
+	"type": "module",
 	"dependencies": {
 		"bits-ui": "^0.21.10",
 		"clsx": "^2.1.1",

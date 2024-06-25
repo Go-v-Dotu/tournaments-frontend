@@ -8,11 +8,7 @@
 </script>
 
 <p
-	class={cn(
-		'max-w-[750px] text-center text-lg text-muted-foreground sm:text-xl',
-		balanced && 'text-balance',
-		className
-	)}
+	class={cn('text-sm text-muted-foreground sm:text-base', balanced && 'text-balance', className)}
 	{...$$restProps}
 >
 	<slot />
