@@ -31,7 +31,7 @@
 		</p>
 		<div class="grid grid-cols-2 gap-2 py-4">
 			{#if data.user === null}
-				<SignUpModal let:modalTriggerBuilder>
+				<SignUpModal let:modalTriggerBuilder signUpForm={data.signUpForm}>
 					<Button builders={[modalTriggerBuilder]}>Sign Up</Button>
 				</SignUpModal>
 				<a
@@ -57,9 +57,8 @@
 	</PageHero.Root>
 
 	<div>
-		<div class="sticky top-0 z-10 flex items-center bg-background/90">
-			<PageSection.Icon icon={Flame} />
-			<PageSection.Root class="flex h-full items-center ">
+		<div class="sticky top-0 z-10 bg-background/90">
+			<PageSection.Root icon={Flame} class="container">
 				<div>
 					<PageSection.Heading>
 						<div class="flex items-center gap-4">Featured Tournaments</div>
@@ -76,9 +75,8 @@
 	</div>
 
 	<div>
-		<div class="sticky top-0 z-10 flex items-center bg-background/90">
-			<PageSection.Icon icon={ChevronsDown} />
-			<PageSection.Root class="bg-background/70">
+		<div class="sticky top-0 z-10 bg-background/90">
+			<PageSection.Root icon={ChevronsDown} class="container">
 				<PageSection.Heading>Upcoming Tournaments</PageSection.Heading>
 				<PageSection.Description class="text-muted-foreground">
 					Upcoming Tournaments Are Just Around the Corner!
