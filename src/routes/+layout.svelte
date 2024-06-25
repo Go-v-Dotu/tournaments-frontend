@@ -12,8 +12,10 @@
 
 <div class="flex h-full flex-col">
 	<Header />
-	<div class="flex-1 overflow-y-auto bg-muted/80">
+	<div class="container flex flex-1 flex-col overflow-y-auto bg-muted/80">
 		<slot />
-		<Footer />
+		<div class="mt-auto">
+			<Footer />
+		</div>
 	</div>
 </div>

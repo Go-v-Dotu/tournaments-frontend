@@ -6,10 +6,7 @@
 </script>
 
 <section
-	class={cn(
-		'mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20',
-		className
-	)}
+	class={cn('mx-auto flex flex-col items-center gap-2 py-4 md:py-8 lg:py-12', className)}
 	{...$$restProps}
 >
 	<slot />

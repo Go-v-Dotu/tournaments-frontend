@@ -7,10 +7,11 @@
 
 	import { cn } from '$lib/utils';
 
-	import { buttonVariants } from '$lib/components/ui/button';
+	import { buttonVariants, Button } from '$lib/components/ui/button';
 	import * as PageHero from '$lib/components/ui/page_hero';
 	import * as PageSection from '$lib/components/ui/page_section';
 
+	import SignUpModal from './sign_up_modal.svelte';
 	import TournamentsGrid from './tornaments_grid.svelte';
 
 	export let data: PageData;
@@ -28,22 +29,37 @@
 		<p class="text-md max-w-[750px] text-center text-muted-foreground sm:text-xl">
 			Epic Prizes. Prestigious Titles. Join Now!
 		</p>
-		<PageHero.Actions>
-			<a href="/docs" class={cn(buttonVariants())}> <Trophy class="mr-2 size-4" /> Host </a>
-			<a
-				href="/"
-				target="_blank"
-				rel="noreferrer"
-				class={cn(buttonVariants({ variant: 'outline' }))}
-			>
-				GitHub
-			</a>
-		</PageHero.Actions>
+		<div class="grid grid-cols-2 gap-2 py-4">
+			{#if data.user === null}
+				<SignUpModal let:modalTriggerBuilder>
+					<Button builders={[modalTriggerBuilder]}>Sign Up</Button>
+				</SignUpModal>
+				<a
+					href="https://github.com/Go-v-Dotu"
+					target="_blank"
+					rel="noreferrer"
+					class={cn(buttonVariants({ variant: 'outline' }))}
+				>
+					Sign In
+				</a>
+			{:else}
+				<a href="/" class={cn(buttonVariants())}> <Trophy class="mr-2 size-4" /> Host </a>
+				<a
+					href="https://github.com/Go-v-Dotu"
+					target="_blank"
+					rel="noreferrer"
+					class={cn(buttonVariants({ variant: 'outline' }))}
+				>
+					My Account
+				</a>
+			{/if}
+		</div>
 	</PageHero.Root>
+
 	<div>
 		<div class="sticky top-0 z-10 flex items-center bg-background/90">
 			<PageSection.Icon icon={Flame} />
-			<PageSection.Root class="flex h-full items-center bg-background/90">
+			<PageSection.Root class="flex h-full items-center ">
 				<div>
 					<PageSection.Heading>
 						<div class="flex items-center gap-4">Featured Tournaments</div>
@@ -58,6 +74,7 @@
 			<TournamentsGrid tournaments={featuredTournaments} />
 		</div>
 	</div>
+
 	<div>
 		<div class="sticky top-0 z-10 flex items-center bg-background/90">
 			<PageSection.Icon icon={ChevronsDown} />

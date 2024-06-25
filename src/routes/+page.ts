@@ -6,7 +6,7 @@ import Card1 from '$lib/assets/images/cards/pic1.jpg';
 import Card2 from '$lib/assets/images/cards/pic2.jpg';
 import Card3 from '$lib/assets/images/cards/pic3.jpg';
 
-export const load = (async () => {
+export const load = (async ({ data }) => {
 	const featuredTournaments: Tournament[] = [
 		{
 			id: 'a',
@@ -84,5 +84,5 @@ export const load = (async () => {
 			status: ''
 		}
 	];
-	return { featuredTournaments, upcomingTournaments };
+	return { featuredTournaments, upcomingTournaments, ...data };
 }) satisfies PageLoad;
