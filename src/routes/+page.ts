@@ -1,13 +1,13 @@
 import type { PageLoad } from './$types';
 
-import type { Tournament } from 'domain/tournaments';
+import type { TournamentPreview } from 'domain/tournaments';
 
 import Card1 from '$lib/assets/images/cards/pic1.jpg';
 import Card2 from '$lib/assets/images/cards/pic2.jpg';
 import Card3 from '$lib/assets/images/cards/pic3.jpg';
 
 export const load = (async ({ data }) => {
-	const featuredTournaments: Tournament[] = [
+	const featuredTournaments: TournamentPreview[] = [
 		{
 			id: 'a',
 			title: 'Tournament 1',
@@ -34,7 +34,7 @@ export const load = (async ({ data }) => {
 		}
 	];
 
-	const upcomingTournaments: Tournament[] = [
+	const upcomingTournaments: TournamentPreview[] = [
 		{
 			id: 'a',
 			title: 'Tournament 1',
@@ -84,5 +84,6 @@ export const load = (async ({ data }) => {
 			status: ''
 		}
 	];
+
 	return { featuredTournaments, upcomingTournaments, ...data };
 }) satisfies PageLoad;

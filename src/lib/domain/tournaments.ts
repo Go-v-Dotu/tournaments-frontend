@@ -1,10 +1,14 @@
 type TournamentId = string;
 
+type TournamentTitle = string;
+
+type TournamentDate = Date;
+
 interface TournamentIdEmbed {
 	id: string;
 }
 
-interface Tournament extends TournamentIdEmbed {
+interface TournamentPreview extends TournamentIdEmbed {
 	title: string;
 	host: string;
 	createdAt: Date;
@@ -12,4 +16,4 @@ interface Tournament extends TournamentIdEmbed {
 	status: string;
 }
 
-export type { TournamentId, Tournament };
+export type { TournamentId, TournamentTitle, TournamentDate, TournamentPreview };
