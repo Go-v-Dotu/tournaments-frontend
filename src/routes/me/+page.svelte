@@ -22,7 +22,7 @@
 	<div>
 		<div class="sticky top-0 z-10 mb-4 flex flex-col items-start gap-4">
 			<div class="h-full">
-				<div class="grid h-full grid-cols-3 items-center">
+				<div class="grid h-full grid-cols-3 items-center gap-2">
 					<div class=" relative aspect-square flex-1 self-center overflow-hidden rounded-md">
 						<img src={UserPic} class="absolute h-full w-full object-cover" alt="avatar" />
 					</div>

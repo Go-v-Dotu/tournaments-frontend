@@ -29,7 +29,7 @@
 
 	let isSubmitting: boolean = false;
 	const form = superForm(hostTournamentForm, {
-		id: 'host',
+		id: `${actionPath}hostTournament`,
 		validators: zodClient(hostTournamentFormSchema),
 		onSubmit: () => {
 			isSubmitting = true;
@@ -70,19 +70,13 @@
 				<Dialog.Title class="text-2xl">Host Tournament</Dialog.Title>
 				<Dialog.Description>Enter tournament details below</Dialog.Description>
 			</Dialog.Header>
-			<form
-				method="POST"
-				use:enhance
-				action={actionPath}
-				id="{actionPath}hostTournament"
-				class="my-2"
-			>
+			<form method="POST" use:enhance action={actionPath} class="my-2">
 				<Form.Field {form} name="title">
 					<Form.Control let:attrs>
 						<Form.Label>Title</Form.Label>
 						<Input {...attrs} bind:value={$formData.title} class="border border-foreground" />
 					</Form.Control>
-					<Form.Description>This is public name of tournament</Form.Description>
+					<Form.Description>This is public name of tournament.</Form.Description>
 					<Form.FieldErrors />
 				</Form.Field>
 				<Form.Field {form} name="date" class="py-4">
@@ -92,8 +86,8 @@
 							<AdvancedCalendar
 								{value}
 								bind:placeholder
-								minValue={new CalendarDate(1900, 1, 1)}
-								maxValue={today(getLocalTimeZone())}
+								minValue={today(getLocalTimeZone())}
+								maxValue={today(getLocalTimeZone()).add({ years: 5 })}
 								calendarLabel="Tournament Date"
 								initialFocus
 								onValueChange={(v) => {

@@ -31,9 +31,9 @@
 		month: 'long'
 	});
 
-	const yearOptions = Array.from({ length: 100 }, (_, i) => ({
-		label: String(new Date().getFullYear() - i),
-		value: new Date().getFullYear() - i
+	const yearOptions = Array.from({ length: 5 }, (_, i) => ({
+		label: String(new Date().getFullYear() + i),
+		value: new Date().getFullYear() + i
 	}));
 
 	$: defaultYear = placeholder
@@ -56,7 +56,7 @@
 
 <CalendarPrimitive.Root
 	{weekdayFormat}
-	class={cn('rounded-md border p-3', className)}
+	class={cn('rounded-md border border-card-foreground p-3', className)}
 	{...$$restProps}
 	on:keydown
 	let:months

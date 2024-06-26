@@ -39,7 +39,7 @@
 			<div class="flex items-center gap-4">
 				<div class="{showHostTournamentButton ? '' : 'hidden'} rounded-md bg-muted/50">
 					<HostTournamentModal
-						actionPath="?/hostTournament"
+						actionPath="/?/hostTournament"
 						{hostTournamentForm}
 						let:modalTriggerBuilder
 					>
