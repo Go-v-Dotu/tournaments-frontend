@@ -12,4 +12,12 @@ export const signUpFormSchema = z.object({
 	})
 });
 
+export const signInFormSchema = z.object({
+	username: z.string().min(usernameMinLength, {
+		message: `Username must have at least ${usernameMinLength} characters`
+	}),
+	password: z.string()
+});
+
 export type SignUpFormSchema = typeof signUpFormSchema;
+export type SignInFormSchema = typeof signInFormSchema;

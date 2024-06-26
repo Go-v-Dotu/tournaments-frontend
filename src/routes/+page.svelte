@@ -12,6 +12,7 @@
 	import * as PageSection from '$lib/components/ui/page_section';
 
 	import SignUpModal from './sign_up_modal.svelte';
+	import SignInModal from './sign_in_modal.svelte';
 	import TournamentsGrid from './tornaments_grid.svelte';
 
 	export let data: PageData;
@@ -34,6 +35,10 @@
 				<SignUpModal let:modalTriggerBuilder signUpForm={data.signUpForm}>
 					<Button builders={[modalTriggerBuilder]}>Sign Up</Button>
 				</SignUpModal>
+
+				<SignInModal let:modalTriggerBuilder signInForm={data.signInForm}>
+					<Button builders={[modalTriggerBuilder]}>Sign Up</Button>
+				</SignInModal>
 				<a
 					href="https://github.com/Go-v-Dotu"
 					target="_blank"

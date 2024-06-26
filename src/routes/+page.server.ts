@@ -11,10 +11,14 @@ import { hash } from '@node-rs/argon2';
 
 import { prisma } from '$lib/server/prisma';
 import { lucia } from '$lib/server/auth';
-import { signUpFormSchema } from '$lib/forms/auth';
+import { signInFormSchema, signUpFormSchema } from '$lib/forms/auth';
 
 export const load = (async ({ locals }) => {
-	return { user: locals.user, signUpForm: await superValidate(zod(signUpFormSchema)) };
+	return {
+		user: locals.user,
+		signUpForm: await superValidate(zod(signUpFormSchema)),
+		signInForm: await superValidate(zod(signInFormSchema))
+	};
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
