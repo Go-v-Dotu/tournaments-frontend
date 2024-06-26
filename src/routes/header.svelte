@@ -20,9 +20,9 @@
 </script>
 
 <div
-	class="sticky top-0 z-50 w-full border-b-2 border-border/40 bg-background/95 py-4 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+	class="sticky top-0 z-50 flex w-full border-b-2 border-border/40 bg-background/95 py-4 backdrop-blur supports-[backdrop-filter]:bg-background/60"
 >
-	<div class="container">
+	<div class="container flex-1">
 		<nav class="flex w-full justify-between">
 			<div class="flex h-full flex-1 items-center md:gap-1 lg:gap-2">
 				<div class="flex">
@@ -36,8 +36,8 @@
 					</a>
 				</div>
 			</div>
-			<div class="flex items-center">
-				<div class={showHostTournamentButton ? '' : 'hidden'}>
+			<div class="flex items-center gap-4">
+				<div class="{showHostTournamentButton ? '' : 'hidden'} rounded-md bg-muted/50">
 					<HostTournamentModal
 						actionPath="?/hostTournament"
 						{hostTournamentForm}
@@ -50,14 +50,14 @@
 					</HostTournamentModal>
 				</div>
 				<div class="flex items-center">
-					<div class="mr-4 flex items-center">
-						<LightSwitch />
-					</div>
 					<div class={username === undefined ? 'collapse' : ''}>
 						<UserNav username={username || ''} />
 					</div>
 				</div>
 			</div>
 		</nav>
+	</div>
+	<div class="mr-4 flex items-center">
+		<LightSwitch />
 	</div>
 </div>
