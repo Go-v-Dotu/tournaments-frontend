@@ -14,6 +14,7 @@
 	import SignUpModal from './sign_up_modal.svelte';
 	import SignInModal from './sign_in_modal.svelte';
 	import TournamentsGrid from './tornaments_grid.svelte';
+	import HostTournamentModal from '$lib/components/host_tournament_modal.svelte';
 
 	export let data: PageData;
 
@@ -56,9 +57,13 @@
 					>
 				</SignInModal>
 			{:else}
-				<a href="/" class={cn(buttonVariants(), 'border border-card-foreground')}>
-					<Trophy class="mr-2 size-4" /> Host
-				</a>
+				<HostTournamentModal
+					actionPath="?/hostTournament"
+					hostTournamentForm={data.hostTournamentForm}
+					let:modalTriggerBuilder
+				>
+					<Button builders={[modalTriggerBuilder]}><Trophy class="mr-2 size-4" /> Host</Button>
+				</HostTournamentModal>
 				<a
 					href="/me"
 					class={cn(buttonVariants({ variant: 'outline' }), 'border border-card-foreground')}

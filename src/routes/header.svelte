@@ -1,10 +1,22 @@
 <script lang="ts">
+	import Trophy from 'lucide-svelte/icons/trophy';
+
+	import { Button } from '$lib/components/ui/button';
+
+	import HostTournamentModal from '$lib/components/host_tournament_modal.svelte';
 	import LightSwitch from '$lib/components/light_switch.svelte';
 	import UserNav from '$lib/components/user_nav.svelte';
 
+	import type { hostTournamentFormSchema } from '$lib/forms/tournament';
+
 	import Commander from '$lib/icons/commander.svelte';
+	import type { Infer, SuperValidated } from 'sveltekit-superforms';
 
 	export let username: string | undefined = undefined;
+
+	export let showHostTournamentButton: boolean = false;
+
+	export let hostTournamentForm: SuperValidated<Infer<typeof hostTournamentFormSchema>>;
 </script>
 
 <div
@@ -25,11 +37,25 @@
 				</div>
 			</div>
 			<div class="flex items-center">
-				<div class="mr-4 flex items-center">
-					<LightSwitch />
+				<div class={showHostTournamentButton ? '' : 'hidden'}>
+					<HostTournamentModal
+						actionPath="?/hostTournament"
+						{hostTournamentForm}
+						let:modalTriggerBuilder
+					>
+						<Button builders={[modalTriggerBuilder]}>
+							<Trophy class="mr-2 size-4" />
+							Host
+						</Button>
+					</HostTournamentModal>
 				</div>
-				<div class={username === undefined ? 'collapse' : ''}>
-					<UserNav username={username || ''} />
+				<div class="flex items-center">
+					<div class="mr-4 flex items-center">
+						<LightSwitch />
+					</div>
+					<div class={username === undefined ? 'collapse' : ''}>
+						<UserNav username={username || ''} />
+					</div>
 				</div>
 			</div>
 		</nav>

@@ -9,13 +9,19 @@
 	import Header from './header.svelte';
 	import Footer from './footer.svelte';
 
+	import { page } from '$app/stores';
+
 	export let data: LayoutData;
 </script>
 
 <ModeWatcher />
 
 <div class="flex h-full flex-col">
-	<Header username={data.user?.username} />
+	<Header
+		username={data.user?.username}
+		hostTournamentForm={data.hostTournamentForm}
+		showHostTournamentButton={$page.url.pathname !== '/'}
+	/>
 	<div class="flex flex-1 flex-col overflow-y-auto bg-muted/80">
 		<slot />
 		<div class="mt-auto">

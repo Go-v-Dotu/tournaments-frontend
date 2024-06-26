@@ -2,13 +2,10 @@ import { lucia } from '$lib/server/auth';
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	console.log('BEBEBE');
-
 	const sessionId = event.cookies.get(lucia.sessionCookieName);
 	if (!sessionId) {
 		event.locals.user = null;
 		event.locals.session = null;
-		console.log('🚀 ~ consthandle:Handle= ~ event.locals:', event.locals);
 		return resolve(event);
 	}
 
@@ -30,6 +27,5 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.user = user;
 	event.locals.session = session;
 
-	console.log('🚀 ~ consthandle:Handle= ~ event.locals:', event.locals);
 	return resolve(event);
 };

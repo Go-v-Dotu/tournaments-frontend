@@ -39,6 +39,7 @@ export const actions: Actions = {
 		}
 
 		const userId = generateIdFromEntropySize(10); // 16 characters long
+		console.log('🚀 ~ signUp: ~ userId:', userId);
 		const passwordHash = await hash(form.data.password, {
 			memoryCost: 19456,
 			timeCost: 2,
@@ -95,5 +96,13 @@ export const actions: Actions = {
 		});
 
 		redirect(StatusCodes.MOVED_PERMANENTLY, '/');
+	},
+	hostTournament: async (event) => {
+		const form = await superValidate(event, zod(signInFormSchema));
+		if (!form.valid) {
+			return fail(400, {
+				form
+			});
+		}
 	}
 };
