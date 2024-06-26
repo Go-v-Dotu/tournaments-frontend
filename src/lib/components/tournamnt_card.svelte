@@ -22,7 +22,7 @@
 <a href="/" class="z-0 space-y-3 rounded-3xl bg-card shadow-sm transition-all hover:scale-105">
 	<Card.Root>
 		<Card.Content class="p-0">
-			<div class="overflow-hidden rounded-md">
+			<div class="overflow-hidden rounded-t-md">
 				<img
 					class={cn('object-cover', aspectRatio === 'portrait' ? 'aspect-[3/4]' : 'aspect-square')}
 					src={tournament.previewUrl}
@@ -47,7 +47,7 @@
 				</div>
 			</Card.Description>
 		</Card.Header>
-		<Card.Footer>
+		<Card.Footer class="">
 			<p>
 				Hosted by <span class="italic">{tournament.host}</span>
 			</p>

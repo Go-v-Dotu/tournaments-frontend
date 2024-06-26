@@ -19,6 +19,8 @@
 
 	const featuredTournaments = data.featuredTournaments;
 	const upcomingTournaments = data.upcomingTournaments;
+
+	let signUpDialogOpened = false;
 </script>
 
 <div>
@@ -32,28 +34,34 @@
 		</p>
 		<div class="grid grid-cols-2 gap-2 py-4">
 			{#if data.user === null}
-				<SignUpModal let:modalTriggerBuilder signUpForm={data.signUpForm}>
+				<SignUpModal
+					let:modalTriggerBuilder
+					signUpForm={data.signUpForm}
+					dialogOpened={signUpDialogOpened}
+				>
 					<Button builders={[modalTriggerBuilder]}>Sign Up</Button>
 				</SignUpModal>
 
-				<SignInModal let:modalTriggerBuilder signInForm={data.signInForm}>
-					<Button builders={[modalTriggerBuilder]}>Sign Up</Button>
-				</SignInModal>
-				<a
-					href="https://github.com/Go-v-Dotu"
-					target="_blank"
-					rel="noreferrer"
-					class={cn(buttonVariants({ variant: 'outline' }))}
+				<SignInModal
+					let:modalTriggerBuilder
+					signInForm={data.signInForm}
+					on:signupRequired={() => {
+						signUpDialogOpened = true;
+					}}
 				>
-					Sign In
-				</a>
+					<Button
+						variant="secondary"
+						class="border border-card-foreground"
+						builders={[modalTriggerBuilder]}>Sign In</Button
+					>
+				</SignInModal>
 			{:else}
-				<a href="/" class={cn(buttonVariants())}> <Trophy class="mr-2 size-4" /> Host </a>
+				<a href="/" class={cn(buttonVariants(), 'border border-card-foreground')}>
+					<Trophy class="mr-2 size-4" /> Host
+				</a>
 				<a
-					href="https://github.com/Go-v-Dotu"
-					target="_blank"
-					rel="noreferrer"
-					class={cn(buttonVariants({ variant: 'outline' }))}
+					href="/me"
+					class={cn(buttonVariants({ variant: 'outline' }), 'border border-card-foreground')}
 				>
 					My Account
 				</a>
@@ -88,7 +96,7 @@
 				</PageSection.Description>
 			</PageSection.Root>
 		</div>
-		<div>
+		<div class="container">
 			<TournamentsGrid tournaments={upcomingTournaments} />
 		</div>
 	</div>

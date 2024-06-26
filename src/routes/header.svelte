@@ -1,7 +1,10 @@
 <script lang="ts">
 	import LightSwitch from '$lib/components/light_switch.svelte';
+	import UserNav from '$lib/components/user_nav.svelte';
 
 	import Commander from '$lib/icons/commander.svelte';
+
+	export let username: string | undefined = undefined;
 </script>
 
 <div
@@ -21,8 +24,13 @@
 					</a>
 				</div>
 			</div>
-			<div class="mr-4 flex items-center">
-				<LightSwitch />
+			<div class="flex items-center">
+				<div class="mr-4 flex items-center">
+					<LightSwitch />
+				</div>
+				<div class={username === undefined ? 'collapse' : ''}>
+					<UserNav username={username || ''} />
+				</div>
 			</div>
 		</nav>
 	</div>

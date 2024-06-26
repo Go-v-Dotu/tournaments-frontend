@@ -4,4 +4,6 @@
 	export let data: LayoutData;
 </script>
 
-<slot />
+<div class="container flex-1">
+	<slot />
+</div>

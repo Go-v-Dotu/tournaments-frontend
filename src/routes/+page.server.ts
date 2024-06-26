@@ -7,7 +7,8 @@ import { fail, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
 import { generateIdFromEntropySize } from 'lucia';
-import { hash } from '@node-rs/argon2';
+
+import { hash, verify } from '@node-rs/argon2';
 
 import { prisma } from '$lib/server/prisma';
 import { lucia } from '$lib/server/auth';
@@ -54,6 +55,39 @@ export const actions: Actions = {
 		});
 
 		const session = await lucia.createSession(userId, {});
+		const sessionCookie = lucia.createSessionCookie(session.id);
+		event.cookies.set(sessionCookie.name, sessionCookie.value, {
+			path: '.',
+			...sessionCookie.attributes
+		});
+
+		redirect(StatusCodes.MOVED_PERMANENTLY, '/');
+	},
+	signIn: async (event) => {
+		const form = await superValidate(event, zod(signInFormSchema));
+		if (!form.valid) {
+			return fail(400, {
+				form
+			});
+		}
+		const existingUser = await prisma.user.findUnique({ where: { username: form.data.username } });
+
+		if (!existingUser) {
+			setError(form, 'Invalid Credentials!');
+			return { form };
+		}
+
+		const validPassword = await verify(existingUser.password_hash, form.data.password, {
+			memoryCost: 19456,
+			timeCost: 2,
+			outputLen: 32,
+			parallelism: 1
+		});
+		if (!validPassword) {
+			return setError(form, 'Invalid Credentials!');
+		}
+
+		const session = await lucia.createSession(existingUser.id, {});
 		const sessionCookie = lucia.createSessionCookie(session.id);
 		event.cookies.set(sessionCookie.name, sessionCookie.value, {
 			path: '.',
