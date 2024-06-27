@@ -18,7 +18,7 @@
 
 <div class="flex h-full flex-col">
 	<Header
-		username={data.user?.username}
+		username={data.username}
 		hostTournamentForm={data.hostTournamentForm}
 		showHostTournamentButton={$page.url.pathname !== '/'}
 	/>

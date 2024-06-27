@@ -5,9 +5,10 @@
 	import Users from 'lucide-svelte/icons/users';
 	import * as Card from '$lib/components/ui/card';
 
-	import type { Tournament } from 'domain/tournaments';
+	import type { Tournament } from 'domain/tournament';
 
 	export let tournament: Tournament;
+	export let href: string;
 
 	export let aspectRatio: 'portrait' | 'square' = 'square';
 
@@ -19,7 +20,7 @@
 	const locale: Intl.LocalesArgument = 'en-US';
 </script>
 
-<a href="/" class="z-0 space-y-3 rounded-3xl bg-card shadow-sm transition-all hover:scale-105">
+<a {href} class="z-0 space-y-3 rounded-3xl bg-card shadow-sm transition-all hover:scale-105">
 	<Card.Root>
 		<Card.Content class="p-0">
 			<div class="overflow-hidden rounded-t-md">
@@ -36,7 +37,7 @@
 				<div class="flex gap-2">
 					<CalendarDays class="size-5" />
 					<p>
-						{tournament.createdAt.toLocaleString(locale, dateTimeFormatOptions)}
+						{tournament.date.toLocaleString(locale, dateTimeFormatOptions)}
 					</p>
 				</div>
 				<div class="flex gap-2">
@@ -47,10 +48,12 @@
 				</div>
 			</Card.Description>
 		</Card.Header>
-		<Card.Footer class="">
-			<p>
-				Hosted by <span class="italic">{tournament.host}</span>
-			</p>
-		</Card.Footer>
+		{#if tournament.host}
+			<Card.Footer class="">
+				<p>
+					Hosted by <span class="italic">{tournament.host}</span>
+				</p>
+			</Card.Footer>
+		{/if}
 	</Card.Root>
 </a>

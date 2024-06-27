@@ -7,7 +7,7 @@
 	import LightSwitch from '$lib/components/light_switch.svelte';
 	import UserNav from '$lib/components/user_nav.svelte';
 
-	import type { hostTournamentFormSchema } from '$lib/forms/tournament';
+	import type { hostTournamentFormSchema } from '$lib/forms/tournament_management';
 
 	import Commander from '$lib/icons/commander.svelte';
 	import type { Infer, SuperValidated } from 'sveltekit-superforms';
@@ -57,7 +57,7 @@
 			</div>
 		</nav>
 	</div>
-	<div class="mr-4 flex items-center">
+	<div class="mr-4 flex items-center md:mr-8">
 		<LightSwitch />
 	</div>
 </div>

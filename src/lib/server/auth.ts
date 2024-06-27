@@ -17,6 +17,7 @@ export const lucia = new Lucia(prismaAdapter, {
 });
 
 interface DatabaseUserAttributes {
+	id: string;
 	username: string;
 }
 

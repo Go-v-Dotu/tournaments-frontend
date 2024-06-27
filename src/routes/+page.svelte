@@ -13,7 +13,7 @@
 
 	import SignUpModal from './sign_up_modal.svelte';
 	import SignInModal from './sign_in_modal.svelte';
-	import TournamentsGrid from './tornaments_grid.svelte';
+	import TournamentsGrid from '$lib/components/tornaments_grid.svelte';
 	import HostTournamentModal from '$lib/components/host_tournament_modal.svelte';
 
 	export let data: PageData;
@@ -58,7 +58,7 @@
 				</SignInModal>
 			{:else}
 				<HostTournamentModal
-					actionPath="?/hostTournament"
+					actionPath="/?/hostTournament"
 					hostTournamentForm={data.hostTournamentForm}
 					let:modalTriggerBuilder
 				>
@@ -87,7 +87,7 @@
 				</div>
 			</PageSection.Root>
 		</div>
-		<div class="container">
+		<div class="container py-4">
 			<TournamentsGrid tournaments={featuredTournaments} />
 		</div>
 	</div>
@@ -101,7 +101,7 @@
 				</PageSection.Description>
 			</PageSection.Root>
 		</div>
-		<div class="container">
+		<div class="container py-4">
 			<TournamentsGrid tournaments={upcomingTournaments} />
 		</div>
 	</div>

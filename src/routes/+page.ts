@@ -1,18 +1,18 @@
 import type { PageLoad } from './$types';
 
-import type { TournamentPreview } from 'domain/tournaments';
+import type { Tournament } from 'domain/tournament';
 
-import Card1 from '$lib/assets/images/cards/pic1.jpg';
-import Card2 from '$lib/assets/images/cards/pic2.jpg';
-import Card3 from '$lib/assets/images/cards/pic3.jpg';
+import Card1 from '$lib/assets/images/cards/preview1.jpg';
+import Card2 from '$lib/assets/images/cards/preview2.jpg';
+import Card3 from '$lib/assets/images/cards/preview3.jpg';
 
 export const load = (async ({ data }) => {
-	const featuredTournaments: TournamentPreview[] = [
+	const featuredTournaments: Tournament[] = [
 		{
 			id: 'a',
 			title: 'Tournament 1',
 			host: 'Host A',
-			createdAt: new Date(),
+			date: new Date(),
 			previewUrl: Card1,
 			status: ''
 		},
@@ -20,7 +20,7 @@ export const load = (async ({ data }) => {
 			id: 'b',
 			title: 'Tournament 2',
 			host: 'Host A',
-			createdAt: new Date(),
+			date: new Date(),
 			previewUrl: Card2,
 			status: ''
 		},
@@ -28,18 +28,18 @@ export const load = (async ({ data }) => {
 			id: 'c',
 			title: 'Tournament 3',
 			host: 'Host B',
-			createdAt: new Date(),
+			date: new Date(),
 			previewUrl: Card3,
 			status: ''
 		}
 	];
 
-	const upcomingTournaments: TournamentPreview[] = [
+	const upcomingTournaments: Tournament[] = [
 		{
 			id: 'a',
 			title: 'Tournament 1',
 			host: 'Host A',
-			createdAt: new Date(),
+			date: new Date(),
 			previewUrl: Card1,
 			status: ''
 		},
@@ -47,7 +47,7 @@ export const load = (async ({ data }) => {
 			id: 'b',
 			title: 'Tournament 2',
 			host: 'Host A',
-			createdAt: new Date(),
+			date: new Date(),
 			previewUrl: Card2,
 			status: ''
 		},
@@ -55,7 +55,7 @@ export const load = (async ({ data }) => {
 			id: 'c',
 			title: 'Tournament 3',
 			host: 'Host B',
-			createdAt: new Date(),
+			date: new Date(),
 			previewUrl: Card3,
 			status: ''
 		},
@@ -63,7 +63,7 @@ export const load = (async ({ data }) => {
 			id: 'aa',
 			title: 'Tournament 1',
 			host: 'Host A',
-			createdAt: new Date(),
+			date: new Date(),
 			previewUrl: Card1,
 			status: ''
 		},
@@ -71,7 +71,7 @@ export const load = (async ({ data }) => {
 			id: 'bb',
 			title: 'Tournament 2222222222222',
 			host: 'Host A',
-			createdAt: new Date(),
+			date: new Date(),
 			previewUrl: Card2,
 			status: ''
 		},
@@ -79,7 +79,7 @@ export const load = (async ({ data }) => {
 			id: 'cc',
 			title: 'Tournament 3',
 			host: 'Host B',
-			createdAt: new Date(),
+			date: new Date(),
 			previewUrl: Card3,
 			status: ''
 		}

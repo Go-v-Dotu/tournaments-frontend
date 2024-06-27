@@ -2,18 +2,26 @@ import { z } from 'zod';
 
 const idSchema = z.object({ id: z.string() });
 
-const hostedTournamentPreviewSchema = z
+const userIdSchema = z.object({ user_id: z.string().optional() });
+
+const usernameSchema = z.object({ username: z.string() });
+
+const tournamentSchema = z
 	.object({
 		title: z.string(),
-		date: z.string().transform((date) => new Date(date)),
-		total_players: z.number()
+		date: z.string().transform((date) => new Date(date))
 	})
 	.merge(idSchema);
 
-export { hostedTournamentPreviewSchema };
-// {
-//     id: '667c88bf131dd02644769b74',
-//     title: '',
-//     date: '0001-01-01T03:00:00+03:00',
-//     total_players: 0
-//   }
+const tournamentPreviewSchema = z
+	.object({
+		total_players: z.number()
+	})
+	.merge(tournamentSchema);
+
+const playerSchema = z
+	.object({ username: z.string(), dropped: z.boolean() })
+	.merge(idSchema)
+	.merge(userIdSchema);
+
+export { idSchema, tournamentSchema, tournamentPreviewSchema, playerSchema, usernameSchema };
