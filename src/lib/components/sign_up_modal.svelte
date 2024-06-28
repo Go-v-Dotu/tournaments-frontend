@@ -45,7 +45,7 @@
 	>
 		<slot {modalTriggerBuilder} />
 	</Dialog.Trigger>
-	<Dialog.Content class="border border-card-foreground bg-muted">
+	<Dialog.Content class="border border-card-foreground bg-muted w-5/6">
 		<div class="flex flex-col">
 			<Dialog.Header>
 				<Dialog.Title class="text-2xl">Sign Up</Dialog.Title>

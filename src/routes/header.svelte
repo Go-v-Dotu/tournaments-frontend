@@ -6,11 +6,13 @@
 	import HostTournamentModal from '$lib/components/host_tournament_modal.svelte';
 	import LightSwitch from '$lib/components/light_switch.svelte';
 	import UserNav from '$lib/components/user_nav.svelte';
+	import MobileNav from '$lib/components/nav/mobile_nav.svelte';
 
 	import type { hostTournamentFormSchema } from '$lib/forms/tournament_management';
 
 	import Commander from '$lib/icons/commander.svelte';
 	import type { Infer, SuperValidated } from 'sveltekit-superforms';
+	import { cn } from '$lib/utils';
 
 	export let username: string | undefined = undefined;
 
@@ -23,8 +25,9 @@
 	class="sticky top-0 z-50 flex w-full border-b-2 border-border/40 bg-background/95 py-4 backdrop-blur supports-[backdrop-filter]:bg-background/60"
 >
 	<div class="container flex-1">
-		<nav class="flex w-full justify-between">
-			<div class="collapse flex h-full flex-1 items-center md:visible md:gap-1 lg:gap-2">
+		<nav class="flex justify-between">
+			<MobileNav {hostTournamentForm} />
+			<div class="hidden h-full items-center sm:visible sm:flex md:gap-1 lg:gap-2">
 				<div class="flex">
 					<Commander class="mx-4 size-12" />
 					<a href="/" aria-current="page" aria-label="tournaments" class="self-end px-4">
@@ -34,7 +37,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="flex items-center gap-4">
+			<div class="hidden items-center gap-4 sm:visible sm:flex">
 				<div class="{showHostTournamentButton ? '' : 'hidden'} rounded-md bg-muted/50">
 					<HostTournamentModal
 						actionPath="/?/hostTournament"
@@ -47,7 +50,7 @@
 						</Button>
 					</HostTournamentModal>
 				</div>
-				<div class="flex items-center">
+				<div class="invisible flex items-center sm:visible">
 					<div class={username === undefined ? 'collapse' : ''}>
 						<UserNav username={username || ''} />
 					</div>
@@ -55,7 +58,7 @@
 			</div>
 		</nav>
 	</div>
-	<div class="mr-4 flex items-center md:mr-8">
+	<div class="">
 		<LightSwitch />
 	</div>
 </div>

@@ -15,10 +15,13 @@
 	import Timing from '$lib/timing';
 
 	import AdvancedCalendar from './advanced_calendar.svelte';
+	import { invalidateAll } from '$app/navigation';
 
 	export let hostTournamentForm: SuperValidated<Infer<typeof hostTournamentFormSchema>>;
 
 	export let actionPath: string;
+
+	export let onTournamentHosted: () => void = () => {};
 
 	let isSubmitting: boolean = false;
 	const form = superForm(hostTournamentForm, {
@@ -36,8 +39,10 @@
 				}, Timing.SignInFormSubmitUX)
 			);
 		},
-		onUpdated: ({ form: f }) => {
+		onUpdated: async ({ form: f }) => {
 			if (f.valid) {
+				await invalidateAll();
+				onTournamentHosted();
 				dialogOpened = false;
 			}
 		}
@@ -62,7 +67,7 @@
 	>
 		<slot {modalTriggerBuilder} />
 	</Dialog.Trigger>
-	<Dialog.Content class="h-5/6 border border-card-foreground bg-muted">
+	<Dialog.Content class="h-5/6 w-4/6 border border-card-foreground bg-muted">
 		<div class="flex h-full flex-col overflow-hidden">
 			<Dialog.Header>
 				<Dialog.Title class="text-2xl">Host Tournament</Dialog.Title>
@@ -74,7 +79,7 @@
 				action={actionPath}
 				class="my-2 flex flex-1 flex-col overflow-hidden"
 			>
-				<div class="overflow-auto px-4">
+				<div class="overflow-auto">
 					<Form.Field {form} name="title">
 						<Form.Control let:attrs>
 							<Form.Label>Title</Form.Label>

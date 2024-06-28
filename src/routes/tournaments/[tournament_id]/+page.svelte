@@ -23,10 +23,10 @@
 </script>
 
 <div class="grid h-full w-full grid-cols-7 items-center">
-	<div class=" col-span-3 col-start-2 mb-10 w-full flex-1 sm:w-8/12">
+	<div class="col-span-4 col-start-1 mb-10 w-full flex-1 lg:col-span-3 lg:col-start-2">
 		<div class="container mx-auto h-full sm:p-10">
 			<nav class="flex items-center justify-between px-4">
-				<div class="text-4xl font-bold text-muted-foreground">
+				<div class="text-2xl font-bold text-muted-foreground md:text-4xl">
 					{data.tournament.date.toDateString()}
 				</div>
 			</nav>
@@ -36,7 +36,7 @@
 					<h1 class="text-balance text-4xl font-bold lg:text-6xl">
 						{data.tournament.title}
 					</h1>
-					<p class="my-10 text-xl">
+					<p class="my-10 text-balance text-xl">
 						Here lies the most captivating description you'll ever encounter.
 					</p>
 
@@ -55,8 +55,9 @@
 			</header>
 		</div>
 	</div>
-	<div class="col-span-2 flex h-full flex-1 flex-col items-center justify-center bg-background/50">
-		<Cards size={400} />
+	<div
+		class="col-span-3 flex h-full flex-1 flex-col items-center justify-center bg-background/50 lg:col-span-3"
+	>
+		<Cards class="size-48 md:size-96" />
 	</div>
-	<div class="col-span-1 self-stretch bg-background/50" />
 </div>

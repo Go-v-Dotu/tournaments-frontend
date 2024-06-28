@@ -123,8 +123,13 @@
 
 <div>
 	<div class="flex items-center justify-between py-4">
-		<Input class="max-w-sm" placeholder="Filter users..." type="text" bind:value={$filterValue} />
-		<div class="mr-24">
+		<Input
+			class="max-w-fit sm:max-w-sm"
+			placeholder="Filter users..."
+			type="text"
+			bind:value={$filterValue}
+		/>
+		<div class="md:mr-24">
 			<AddGuestPlayerModal
 				let:modalTriggerBuilder
 				addGuestPlayerForm={data.addGuestPlayerForm}
