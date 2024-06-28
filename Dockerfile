@@ -1,4 +1,4 @@
-FROM node:20.15-slim AS base 
+FROM node:20.15.0 AS base 
 # newer node builds no longer ship libssl but prisma does require it 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -7,7 +7,7 @@ COPY . /app
 WORKDIR /app
 
 FROM base AS prod-deps
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-     
 # https://github.com/prisma/prisma/discussions/13263
 RUN pnpm dlx prisma generate
 
