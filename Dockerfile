@@ -1,4 +1,4 @@
-FROM node:18.15-slim AS base 
+FROM node:20.15-slim AS base 
 # newer node builds no longer ship libssl but prisma does require it 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
