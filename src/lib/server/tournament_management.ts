@@ -1,6 +1,9 @@
 import { env } from '$env/dynamic/private';
 
+import { getLocalTimeZone, parseDate } from '@internationalized/date';
+
 import { ContentType, HTTPMethod } from '$lib/constants';
+import { generatePreviewUrl } from '$lib/utils';
 
 import type {
 	TournamentPreview,
@@ -23,16 +26,11 @@ import {
 	type HostTournamentSchema,
 	hostTournamentSchemaController,
 	type AddGuestPlayerSchema,
-	addGuestPlayerSchemaController
+	addGuestPlayerSchemaController,
+	addPlayerSchemaController,
+	dropPlayerSchemaController,
+	recoverPlayerSchemaController
 } from './controllers/tournament_management';
-
-import preview1 from '$lib/assets/images/cards/preview1.jpg';
-import preview2 from '$lib/assets/images/cards/preview2.jpg';
-import preview3 from '$lib/assets/images/cards/preview3.jpg';
-
-import { getLocalTimeZone, parseDate } from '@internationalized/date';
-
-const availablePreviews: string[] = [preview1, preview2, preview3];
 
 class UseCases {
 	constructor(
@@ -81,10 +79,13 @@ class UseCases {
 		const responseResultJson = await response.json();
 		responseResult = await getTournamentByIdSchemaController.parseAsync(responseResultJson);
 
-		return responseResult.tournament;
+		return {
+			...responseResult.tournament,
+			totalPlayers: responseResult.tournament.total_players
+		};
 	};
 
-	getAllTournaments = async (userId: string): Promise<TournamentPreview[]> => {
+	getAllHostedTournaments = async (userId: string): Promise<TournamentPreview[]> => {
 		let responseResult: GetAllTournamentPreviewsSchemaController | undefined = undefined;
 
 		const endpoint = `${this.endpointBase}/user/${this.resourceName}`;
@@ -99,7 +100,7 @@ class UseCases {
 		return responseResult.tournaments.map((v) => ({
 			...v,
 			totalPlayers: v.total_players,
-			previewUrl: this.generatePreviewUrl(v.id)
+			previewUrl: generatePreviewUrl(v.id)
 		}));
 	};
 
@@ -120,6 +121,56 @@ class UseCases {
 			userId: v.user_id || undefined,
 			playerId: v.id
 		}));
+	};
+
+	addPlayer = async (userId: UserId, tournamentId: TournamentId): Promise<void> => {
+		const endpoint = `${this.endpointBase}/${this.resourceName}/${tournamentId}/enroll`;
+		const response = await fetch(endpoint, {
+			method: HTTPMethod.POST,
+			headers: {
+				...this.constructAuthorizationHeader(userId),
+				'content-type': ContentType.APPLICATION_JSON
+			}
+		});
+
+		const responseResultJson = await response.json();
+		await addPlayerSchemaController.parseAsync(responseResultJson);
+	};
+
+	dropPlayer = async (
+		userId: UserId,
+		tournamentId: TournamentId,
+		playerId: PlayerId
+	): Promise<void> => {
+		const endpoint = `${this.endpointBase}/${this.resourceName}/${tournamentId}/players/${playerId}/drop`;
+		const response = await fetch(endpoint, {
+			method: HTTPMethod.POST,
+			headers: {
+				...this.constructAuthorizationHeader(userId),
+				'content-type': ContentType.APPLICATION_JSON
+			}
+		});
+
+		const responseResultJson = await response.json();
+		await dropPlayerSchemaController.parseAsync(responseResultJson);
+	};
+
+	recoverPlayer = async (
+		userId: UserId,
+		tournamentId: TournamentId,
+		playerId: PlayerId
+	): Promise<void> => {
+		const endpoint = `${this.endpointBase}/${this.resourceName}/${tournamentId}/players/${playerId}/recover`;
+		const response = await fetch(endpoint, {
+			method: HTTPMethod.POST,
+			headers: {
+				...this.constructAuthorizationHeader(userId),
+				'content-type': ContentType.APPLICATION_JSON
+			}
+		});
+
+		const responseResultJson = await response.json();
+		await recoverPlayerSchemaController.parseAsync(responseResultJson);
 	};
 
 	addGuestPlayer = async (
@@ -144,17 +195,6 @@ class UseCases {
 			await addGuestPlayerSchemaController.parseAsync(responseResultJson);
 
 		return addGuestPlayerResult.id;
-	};
-
-	private generatePreviewUrl = (id: string) => {
-		let hash = 0;
-		for (let i = 0; i < id.length; i++) {
-			const char = id.charCodeAt(i);
-			hash = (hash << 5) - hash + char;
-			hash |= 0; // Convert to 32bit integer
-		}
-		const index = Math.abs(hash) % availablePreviews.length;
-		return availablePreviews[index];
 	};
 
 	private get endpointBase(): string {

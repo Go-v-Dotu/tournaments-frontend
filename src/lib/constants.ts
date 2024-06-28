@@ -3,7 +3,8 @@ const API_V1_PREFIX = '/api/v1';
 const enum HTTPMethod {
 	GET = 'GET',
 	POST = 'POST',
-	PUT = 'PUT'
+	PUT = 'PUT',
+	DELETE = 'DELETE'
 }
 
 const enum ContentType {

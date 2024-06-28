@@ -40,6 +40,15 @@ type AddGuestPlayerSchema = z.infer<typeof addGuestPlayerSchema>;
 const addGuestPlayerSchemaController = z.object({}).merge(idSchema);
 type AddGuestPlayerSchemaController = z.infer<typeof addGuestPlayerSchemaController>;
 
+const addPlayerSchemaController = z.object({});
+type AddPlayerSchemaController = z.infer<typeof addPlayerSchemaController>;
+
+const dropPlayerSchemaController = z.object({});
+type DropPlayerSchemaController = z.infer<typeof dropPlayerSchemaController>;
+
+const recoverPlayerSchemaController = z.object({});
+type RecoverPlayerSchemaController = z.infer<typeof recoverPlayerSchemaController>;
+
 export {
 	getTournamentByIdSchemaController,
 	type GetTournamentByIdSchemaController,
@@ -53,6 +62,12 @@ export {
 	type GetAllPlayersSchemaController,
 	addGuestPlayerSchema,
 	type AddGuestPlayerSchema,
+	addPlayerSchemaController,
+	type AddPlayerSchemaController,
 	addGuestPlayerSchemaController,
-	type AddGuestPlayerSchemaController
+	type AddGuestPlayerSchemaController,
+	dropPlayerSchemaController,
+	type DropPlayerSchemaController,
+	recoverPlayerSchemaController,
+	type RecoverPlayerSchemaController
 };

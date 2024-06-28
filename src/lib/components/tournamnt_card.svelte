@@ -5,10 +5,11 @@
 	import Users from 'lucide-svelte/icons/users';
 	import * as Card from '$lib/components/ui/card';
 
-	import type { Tournament } from 'domain/tournament';
+	import type { TournamentPreview } from 'domain/tournament_management';
 
-	export let tournament: Tournament;
+	export let tournament: TournamentPreview;
 	export let href: string;
+	export let showHost: boolean = true;
 
 	export let aspectRatio: 'portrait' | 'square' = 'square';
 
@@ -43,15 +44,15 @@
 				<div class="flex gap-2">
 					<Users class="size-5" />
 					<p>
-						{Math.ceil(Math.random() * 100) % 10} registered
+						{tournament.totalPlayers} enrolled
 					</p>
 				</div>
 			</Card.Description>
 		</Card.Header>
 		{#if tournament.host}
-			<Card.Footer class="">
+			<Card.Footer class={showHost ? '' : 'collapse'}>
 				<p>
-					Hosted by <span class="italic">{tournament.host}</span>
+					Hosted by <span class="italic">{tournament.host.username}</span>
 				</p>
 			</Card.Footer>
 		{/if}

@@ -20,7 +20,7 @@
 	<Header
 		username={data.username}
 		hostTournamentForm={data.hostTournamentForm}
-		showHostTournamentButton={$page.url.pathname !== '/'}
+		showHostTournamentButton={$page.url.pathname !== '/' && data.username !== undefined}
 	/>
 	<div class="flex flex-1 flex-col overflow-y-auto bg-muted/80">
 		<slot />

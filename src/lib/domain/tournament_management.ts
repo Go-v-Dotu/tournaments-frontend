@@ -7,14 +7,15 @@ type TournamentTitle = string;
 interface TournamentIdEmbed {
 	id: string;
 }
+
 interface Tournament extends TournamentIdEmbed {
 	title: TournamentTitle;
 	date: Date;
+	totalPlayers: number;
 }
 
 interface TournamentPreview extends Tournament {
 	previewUrl: string;
-	totalPlayers: number;
 }
 
 type PlayerId = string;

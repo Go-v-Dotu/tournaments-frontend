@@ -18,12 +18,14 @@ import { hostTournamentFormSchema } from '$lib/forms/tournament_management';
 
 import userUseCases from '$lib/server/user';
 import tournamentManagementUseCases from '$lib/server/tournament_management';
+import tournamentParticipationUseCases from '$lib/server/tournament_participation';
 
 export const load = (async ({ locals }) => {
+	const tournamentPreviews = await tournamentParticipationUseCases.getAllTournaments();
+
 	return {
 		user: locals.user,
-		signUpForm: await superValidate(zod(signUpFormSchema)),
-		signInForm: await superValidate(zod(signInFormSchema))
+		tournamentPreviews
 	};
 }) satisfies PageServerLoad;
 
@@ -75,7 +77,7 @@ export const actions: Actions = {
 			...sessionCookie.attributes
 		});
 
-		redirect(StatusCodes.MOVED_PERMANENTLY, '/');
+		redirect(StatusCodes.MOVED_PERMANENTLY, '');
 	},
 	signIn: async (event) => {
 		const form = await superValidate(event, zod(signInFormSchema));
@@ -108,7 +110,7 @@ export const actions: Actions = {
 			...sessionCookie.attributes
 		});
 
-		redirect(StatusCodes.MOVED_PERMANENTLY, '/');
+		redirect(StatusCodes.MOVED_PERMANENTLY, '');
 	},
 	hostTournament: async (event) => {
 		if (event.locals.user === null) redirect(StatusCodes.SEE_OTHER, '/');
@@ -120,14 +122,12 @@ export const actions: Actions = {
 			});
 		}
 
-		const id = await tournamentManagementUseCases.hostTournament(
+		const hosted_tournament_id = await tournamentManagementUseCases.hostTournament(
 			event.locals.user.id,
 			form.data.title,
 			form.data.date
 		);
-		console.log('🚀 ~ hostTournament: ~ id:', id);
 
-		return { form };
-		// tournamentManagementUseCases.hostTournament(event.locals.user.id, form.data);
+		return { form, hosted_tournament_id };
 	}
 };

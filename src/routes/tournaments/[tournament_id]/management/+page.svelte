@@ -1,10 +1,8 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { get } from 'svelte/store';
 
-	import { Button } from '$lib/components/ui/button';
-	import { Input } from '$lib/components/ui/input';
-	import * as Table from '$lib/components/ui/table';
+	import { get } from 'svelte/store';
+	import { page } from '$app/stores';
 
 	import { Render, Subscribe, createRender, createTable } from 'svelte-headless-table';
 	import {
@@ -17,16 +15,21 @@
 	import ArrowUpDown from 'lucide-svelte/icons/arrow-up-down';
 	import UserPlus from 'lucide-svelte/icons/user-plus';
 
+	import { Button } from '$lib/components/ui/button';
+	import { Input } from '$lib/components/ui/input';
+	import * as Table from '$lib/components/ui/table';
+	import PlayerStatusTag from '$lib/components/player_status_tag.svelte';
+
 	import type { Player } from 'domain/tournament_management';
 
 	import { playersStore } from '$lib/stores/players';
 
+	import { API_V1_PREFIX, HTTPMethod } from '$lib/constants';
 	import LoadSpinner from '$lib/components/load_spinner.svelte';
 
 	import AddGuestPlayerModal from './add_guest_player_modal.svelte';
-
 	import DropPlayerButton from './drop_player_button.svelte';
-	import PlayerStatusTag from './player_status_tag.svelte';
+	import RecoverPlayerButton from './recover_player_button.svelte';
 
 	export let data: PageData;
 
@@ -38,7 +41,7 @@
 		playersStore.set([...get(playersStore), player]);
 	};
 
-	const dropPlayer = (playerId: string) => {
+	const dropPlayer = async (playerId: string) => {
 		playersStore.update((players) => {
 			const playerToDrop = players.find((v) => v.playerId === playerId);
 			if (playerToDrop) {
@@ -46,6 +49,20 @@
 			}
 			return players;
 		});
+		const endpoint = `${API_V1_PREFIX}/tournaments/${$page.params.tournament_id}/players/${playerId}/drop`;
+		await fetch(endpoint, { method: HTTPMethod.POST });
+	};
+
+	const recoverPlayer = async (playerId: string) => {
+		playersStore.update((players) => {
+			const playerToDrop = players.find((v) => v.playerId === playerId);
+			if (playerToDrop) {
+				playerToDrop.dropped = false;
+			}
+			return players;
+		});
+		const endpoint = `${API_V1_PREFIX}/tournaments/${$page.params.tournament_id}/players/${playerId}/recover`;
+		await fetch(endpoint, { method: HTTPMethod.POST });
 	};
 
 	const table = createTable(playersStore, {
@@ -79,9 +96,8 @@
 			header: '',
 			cell: ({ value: { playerId, dropped } }) =>
 				dropped
-					? createRender(DropPlayerButton, {
-							onPlayerDrop: () => {},
-							hidden: true
+					? createRender(RecoverPlayerButton, {
+							onPlayerRecover: () => recoverPlayer(playerId)
 						})
 					: createRender(DropPlayerButton, {
 							onPlayerDrop: () => dropPlayer(playerId)

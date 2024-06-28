@@ -11,17 +11,15 @@
 	import * as PageHero from '$lib/components/ui/page_hero';
 	import * as PageSection from '$lib/components/ui/page_section';
 
-	import SignUpModal from './sign_up_modal.svelte';
-	import SignInModal from './sign_in_modal.svelte';
+	import AuthActions from '$lib/components/auth_actions.svelte';
 	import TournamentsGrid from '$lib/components/tornaments_grid.svelte';
 	import HostTournamentModal from '$lib/components/host_tournament_modal.svelte';
 
 	export let data: PageData;
 
-	const featuredTournaments = data.featuredTournaments;
-	const upcomingTournaments = data.upcomingTournaments;
+	const featuredTournaments = data.tournamentPreviews.slice(0, 5);
+	const upcomingTournaments = data.tournamentPreviews;
 
-	let signUpDialogOpened = false;
 </script>
 
 <div>
@@ -35,27 +33,7 @@
 		</p>
 		<div class="grid grid-cols-2 gap-2 py-4">
 			{#if data.user === null}
-				<SignUpModal
-					let:modalTriggerBuilder
-					signUpForm={data.signUpForm}
-					dialogOpened={signUpDialogOpened}
-				>
-					<Button builders={[modalTriggerBuilder]}>Sign Up</Button>
-				</SignUpModal>
-
-				<SignInModal
-					let:modalTriggerBuilder
-					signInForm={data.signInForm}
-					on:signupRequired={() => {
-						signUpDialogOpened = true;
-					}}
-				>
-					<Button
-						variant="secondary"
-						class="border border-card-foreground"
-						builders={[modalTriggerBuilder]}>Sign In</Button
-					>
-				</SignInModal>
+				<AuthActions signUpForm={data.signUpForm} signInForm={data.signInForm} />
 			{:else}
 				<HostTournamentModal
 					actionPath="/?/hostTournament"

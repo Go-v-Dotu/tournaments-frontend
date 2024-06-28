@@ -1,26 +1,23 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-
 	import { buttonVariants } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import * as Form from '$lib/components/ui/form';
 	import { Input } from '$lib/components/ui/input';
-	import { Button } from '$lib/components/ui/button';
 
 	import RotateCW from 'lucide-svelte/icons/rotate-cw';
 
 	import { superForm, type SuperValidated, type Infer } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 
-	import { signInFormSchema } from '$lib/forms/auth';
+	import { signUpFormSchema } from '$lib/forms/auth';
 	import Timing from '$lib/timing';
 
-	export let signInForm: SuperValidated<Infer<typeof signInFormSchema>>;
+	export let signUpForm: SuperValidated<Infer<typeof signUpFormSchema>>;
 
 	let isSubmitting: boolean = false;
-	const form = superForm(signInForm, {
-		id: 'signIn',
-		validators: zodClient(signInFormSchema),
+	const form = superForm(signUpForm, {
+		id: 'signUp',
+		validators: zodClient(signUpFormSchema),
 		onSubmit: () => {
 			isSubmitting = true;
 		},
@@ -30,16 +27,14 @@
 				setTimeout(() => {
 					isSubmitting = false;
 					r(true);
-				}, Timing.SignInFormSubmitUX)
+				}, Timing.SignUpFormSubmitUX)
 			);
 		}
 	});
 
 	const { form: formData, enhance, errors } = form;
 
-	const dispatch = createEventDispatcher();
-
-	let dialogOpened = false;
+	export let dialogOpened = false;
 </script>
 
 <Dialog.Root bind:open={dialogOpened}>
@@ -53,12 +48,10 @@
 	<Dialog.Content class="border border-card-foreground bg-muted">
 		<div class="flex flex-col">
 			<Dialog.Header>
-				<Dialog.Title class="text-2xl">Sign In</Dialog.Title>
-				<Dialog.Description>
-					Enter your credentials below to sign into your account
-				</Dialog.Description>
+				<Dialog.Title class="text-2xl">Sign Up</Dialog.Title>
+				<Dialog.Description>Enter your credentials below to create account</Dialog.Description>
 			</Dialog.Header>
-			<form method="POST" use:enhance action="?/signIn" id="signIn" class="my-2">
+			<form method="POST" use:enhance action="/?/signUp" class="my-2">
 				<Form.Field {form} name="username">
 					<Form.Control let:attrs>
 						<Form.Label>Username</Form.Label>
@@ -97,24 +90,9 @@
 					{#if isSubmitting}
 						<RotateCW class="mr-2 h-4 w-4 animate-spin" />
 					{/if}
-					Sign In
+					Sign Up
 				</Form.Button>
 			</form>
-			<Dialog.Footer class="sm:flex-col sm:justify-center">
-				<div class="text-s m mt-4 text-center">
-					Don&apos;t have an account?
-					<Button
-						class="mx-0 px-0 underline"
-						variant="ghost"
-						on:click={() => {
-							dialogOpened = false;
-							dispatch('signupRequired');
-						}}
-					>
-						Sign up
-					</Button>
-				</div>
-			</Dialog.Footer>
 		</div>
 	</Dialog.Content>
 </Dialog.Root>

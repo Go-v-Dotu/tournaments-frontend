@@ -44,10 +44,12 @@
 			<Overview />
 		</Tabs.Content>
 		<Tabs.Content value="participation">
-			<Participation hostedTournamentPreviewsPromise={data.tournamentPreviewsPromise} />
+			<Participation
+				participatedTournamentPreviewsPromise={data.participatedTournamentPreviewsPromise}
+			/>
 		</Tabs.Content>
 		<Tabs.Content value="organization">
-			<Organization tournamentPreviewsPromise={data.tournamentPreviewsPromise} />
+			<Organization hostedTournamentPreviewsPromise={data.hostedTournamentPreviewsPromise} />
 		</Tabs.Content>
 	</Tabs.Root>
 </div>

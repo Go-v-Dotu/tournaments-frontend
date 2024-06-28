@@ -29,7 +29,7 @@
 					<Commander class="mx-4 size-12" />
 					<a href="/" aria-current="page" aria-label="tournaments" class="self-end px-4">
 						<p
-							class="text-4xl font-extrabold leading-3 tracking-tight hover:text-foreground/80 md:text-2xl lg:text-4xl"
+							class="text-4xl font-extrabold tracking-tight hover:text-foreground/80 md:text-2xl lg:text-4xl"
 						>
 							Tournaments
 						</p>
