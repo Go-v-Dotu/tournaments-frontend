@@ -19,7 +19,6 @@
 
 	const featuredTournaments = data.tournamentPreviews.slice(0, 5);
 	const upcomingTournaments = data.tournamentPreviews;
-
 </script>
 
 <div>
@@ -28,10 +27,11 @@
 		<PageHero.Description class="text-muted-foreground">
 			Host and Join High-Stakes Tournaments - Free of Charge!
 		</PageHero.Description>
-		<p class="text-md max-w-[750px] text-center text-muted-foreground sm:text-xl">
+		<PageHero.Description class="text-muted-foreground">
 			Epic Prizes. Prestigious Titles. Join Now!
-		</p>
-		<div class="grid grid-cols-2 gap-2 py-4">
+		</PageHero.Description>
+		<p class="text-md max-w-[750px] text-center text-muted-foreground sm:text-xl"></p>
+		<div class="flex grid-cols-2 flex-col gap-2 py-4 md:grid">
 			{#if data.user === null}
 				<AuthActions signUpForm={data.signUpForm} signInForm={data.signInForm} />
 			{:else}

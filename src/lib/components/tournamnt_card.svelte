@@ -5,11 +5,15 @@
 	import Users from 'lucide-svelte/icons/users';
 	import * as Card from '$lib/components/ui/card';
 
-	import type { TournamentPreview } from 'domain/tournament_management';
+	import type { TournamentPreview as HostedTournamentPreview } from 'domain/tournament_management';
+	import type {
+		TournamentPreview as ParticipatedTournamentPreview,
+		Host
+	} from 'domain/tournament_participation';
 
-	export let tournament: TournamentPreview;
+	export let tournament: ParticipatedTournamentPreview | HostedTournamentPreview;
 	export let href: string;
-	export let showHost: boolean = true;
+	export let host: Host | undefined;
 
 	export let aspectRatio: 'portrait' | 'square' = 'square';
 
@@ -37,24 +41,23 @@
 			<Card.Description class="flex flex-col gap-2 truncate">
 				<div class="flex gap-2">
 					<CalendarDays class="size-5" />
-					<p>
+					<p class="text-sm md:text-lg">
 						{tournament.date.toLocaleString(locale, dateTimeFormatOptions)}
 					</p>
 				</div>
 				<div class="flex gap-2">
 					<Users class="size-5" />
 					<p>
-						{tournament.totalPlayers} enrolled
+						{tournament.totalPlayers} <span class="hidden md:visible">enrolled</span>
 					</p>
 				</div>
 			</Card.Description>
 		</Card.Header>
-		{#if tournament.host}
-			<Card.Footer class={showHost ? '' : 'collapse'}>
-				<p>
-					Hosted by <span class="italic">{tournament.host.username}</span>
-				</p>
-			</Card.Footer>
-		{/if}
+
+		<Card.Footer class={host === undefined ? 'collapse' : ''}>
+			<p>
+				Hosted by <span class="italic">{host && host.username}</span>
+			</p>
+		</Card.Footer>
 	</Card.Root>
 </a>

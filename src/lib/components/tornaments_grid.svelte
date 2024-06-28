@@ -4,20 +4,24 @@
 
 	import TournamentCard from '$lib/components/tournamnt_card.svelte';
 
-	export let tournaments: HostedTournamentPreview[] | HostedTournamentPreview[];
+	export let tournaments: ParticipatedTournamentPreview[] | HostedTournamentPreview[];
 
 	export let purpose: 'management' | 'participation' | '' = '';
 
 	tournaments.sort((a, b) => a.date.getTime() - b.date.getTime());
+
+	function isParticipatedTournament(tournament: any): tournament is ParticipatedTournamentPreview {
+		return (tournament as ParticipatedTournamentPreview).host !== undefined;
+	}
 </script>
 
-<div class="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5">
+<div class=" grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
 	{#each tournaments as tournament (tournament.id)}
 		<TournamentCard
-			href="tournaments/{tournament.id}{purpose ? `/${purpose}` : ''}"
+			href={`tournaments/${tournament.id}${purpose ? `/${purpose}` : ''}`}
 			{tournament}
 			aspectRatio="square"
-			showHost={purpose !== 'management'}
+			host={isParticipatedTournament(tournament) ? tournament.host : undefined}
 		/>
 	{/each}
 </div>

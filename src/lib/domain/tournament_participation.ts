@@ -40,4 +40,12 @@ interface Player {
 	dropped: boolean;
 }
 
-export type { PlayerId, Player, TournamentId, TournamentTitle, Tournament, TournamentPreview };
+export type {
+	Host,
+	PlayerId,
+	Player,
+	TournamentId,
+	TournamentTitle,
+	Tournament,
+	TournamentPreview
+};

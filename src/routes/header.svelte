@@ -24,13 +24,11 @@
 >
 	<div class="container flex-1">
 		<nav class="flex w-full justify-between">
-			<div class="flex h-full flex-1 items-center md:gap-1 lg:gap-2">
+			<div class="collapse flex h-full flex-1 items-center md:visible md:gap-1 lg:gap-2">
 				<div class="flex">
 					<Commander class="mx-4 size-12" />
 					<a href="/" aria-current="page" aria-label="tournaments" class="self-end px-4">
-						<p
-							class="text-4xl font-extrabold tracking-tight hover:text-foreground/80 md:text-2xl lg:text-4xl"
-						>
+						<p class="text-2xl font-extrabold tracking-tight hover:text-foreground/80 md:text-4xl">
 							Tournaments
 						</p>
 					</a>
