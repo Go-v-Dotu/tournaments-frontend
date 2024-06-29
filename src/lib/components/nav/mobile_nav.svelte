@@ -19,6 +19,8 @@
 	let open = false;
 
 	export let hostTournamentForm: SuperValidated<Infer<typeof hostTournamentFormSchema>>;
+
+	export let username: string | undefined = undefined;
 </script>
 
 <Sheet.Root bind:open>
@@ -52,6 +54,7 @@
 					await goto('/me');
 					open = false;
 				}}
+				class={username !== undefined ? '' : 'invisible'}
 			>
 				My account
 			</Button>
@@ -63,14 +66,18 @@
 					open = false;
 				}}
 			>
-				<Button builders={[modalTriggerBuilder]}>
+				<Button
+					builders={[modalTriggerBuilder]}
+					variant="outline"
+					class={username !== undefined ? '' : 'invisible'}
+				>
 					<Trophy class="mr-2 size-4" />
 					Host
 				</Button>
 			</HostTournamentModal>
 			<Button
 				variant="outline"
-				class=" mt-auto "
+				class="mt-auto {username !== undefined ? '' : 'invisible'}"
 				on:click={async () => {
 					const response = await fetch(`${API_V1_PREFIX}/sign-out`, { method: HTTPMethod.POST });
 					goto('/');

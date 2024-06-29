@@ -12,7 +12,6 @@
 
 	import Commander from '$lib/icons/commander.svelte';
 	import type { Infer, SuperValidated } from 'sveltekit-superforms';
-	import { cn } from '$lib/utils';
 
 	export let username: string | undefined = undefined;
 
@@ -26,7 +25,7 @@
 >
 	<div class="container flex-1">
 		<nav class="flex justify-between">
-			<MobileNav {hostTournamentForm} />
+			<MobileNav {hostTournamentForm} {username} />
 			<div class="hidden h-full items-center sm:visible sm:flex md:gap-1 lg:gap-2">
 				<div class="flex">
 					<Commander class="mx-4 size-12" />
