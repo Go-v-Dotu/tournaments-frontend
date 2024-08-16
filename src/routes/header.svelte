@@ -28,7 +28,7 @@
 			<MobileNav {hostTournamentForm} {username} />
 			<div class="hidden h-full items-center sm:visible sm:flex md:gap-1 lg:gap-2">
 				<div class="flex">
-					<Commander class="mx-4 size-12" />
+					<Commander class="mr-4 size-12" />
 					<a href="/" aria-current="page" aria-label="tournaments" class="self-end px-4">
 						<p class="text-2xl font-extrabold tracking-tight hover:text-foreground/80 md:text-4xl">
 							Tournaments

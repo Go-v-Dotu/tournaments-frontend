@@ -6,7 +6,7 @@
 	import CalendarCheck from 'lucide-svelte/icons/clipboard-pen-line';
 	import ClipboardCheck from 'lucide-svelte/icons/clipboard-check';
 	import BookHeart from 'lucide-svelte/icons/book-heart';
-	import BarChart from 'lucide-svelte/icons/bar-chart-2';
+	import BarChart from 'lucide-svelte/icons/chart-column';
 
 	import FavouriteCard from '$lib/assets/images/cards/favourite_card.png';
 </script>

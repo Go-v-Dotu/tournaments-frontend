@@ -20,9 +20,9 @@
 			{#each data.players as player (player.playerId)}
 				<Table.Row>
 					<Table.Cell class="font-medium">{player.username}</Table.Cell>
-					<Table.Cell
-						><PlayerStatusTag status={player.dropped ? 'dropped' : 'enrolled'} /></Table.Cell
-					>
+					<Table.Cell>
+						<PlayerStatusTag status={player.dropped ? 'dropped' : 'enrolled'} />
+					</Table.Cell>
 				</Table.Row>
 			{/each}
 		</Table.Body>
